@@ -1,0 +1,36 @@
+<div class="panel panel-default">
+  <div class="panel-heading">RSS Feed from Ars Technica</div>
+  <div class="panel-body">
+    <div class="pre-scrollable">
+      <table class="table table-striped table-fixed">
+        <tbody>
+        <% @site_feed.each do |entry| %>
+          <tr>
+            <td><%= link_to "#{entry[:title]}", "#{entry[:link]}", {target: "_blank"} %></td>
+            <td><%= entry[:description] %></td>
+            <td><%= link_to "Save", save_rss_feed_path(data: entry.to_json.html_safe), {method: :post}  %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="panel panel-default">
+  <div class="panel-heading">Saved Feeds from Ars Technica</div>
+  <div class="panel-body">
+    <div class="pre-scrollable">
+      <table class="table table-striped table-fixed">
+        <tbody>
+        <% @rss_feeds.each do |entry| %>
+          <tr>
+            <td><%= link_to "#{entry[:title]}", "#{entry[:link]}", {target: "_blank"} %></td>
+            <td><%= entry[:description] %></td>
+            <td><%= link_to "Delete", remove_rss_feed_path(id: entry.id), {method: :delete}  %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
